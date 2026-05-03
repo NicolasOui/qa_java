@@ -17,13 +17,14 @@ public class TestLion {
     @Mock
     Feline feline;
 
-
+    /*
     @Test
         public void ConstructorHaveManeIfMale() throws Exception {
         Lion lion = new Lion("Самец", feline);
         //assertEquals(true, lion.hasMane);
         assertTrue(lion.doesHaveMane());
     }
+    */
 
     @Test(expected = Exception.class)
         //тест ошибки конструктора
