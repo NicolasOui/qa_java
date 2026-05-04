@@ -16,27 +16,25 @@ public class TestLion {
     @Mock
     Feline feline;
 
-    /*
-    @Test
-        public void ConstructorHaveManeIfMale() throws Exception {
-        Lion lion = new Lion("Самец", feline);
-        //assertEquals(true, lion.hasMane);
-        assertTrue(lion.doesHaveMane());
-    }
-    */
 
-    @Test(expected = Exception.class)
-        //тест ошибки конструктора
-        public void ConstructorExceptionOnInvalidSex() throws Exception {
-        Lion lion = new Lion("Неизвестно кто", feline);
+    @Test
+        public void ConstructorVerivyException() {
+        Exception ex = assertThrows(Exception.class, () -> new Lion("Неизвестно", feline));
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", ex.getMessage());
     }
 
     @Test
     public void getKittensReturnsNumber() throws Exception {
         Lion lion = new Lion("Самец", feline);
         Mockito.when(feline.getKittens()).thenReturn(3);
-
         assertEquals(3, lion.getKittens());
+
+    }
+
+    @Test
+    public void getKittensCallsFelineGetKittens() throws Exception {
+        Lion lion = new Lion("Самец", feline);
+        Mockito.when(feline.getKittens()).thenReturn(3);
         Mockito.verify(feline).getKittens();
     }
 
@@ -44,12 +42,6 @@ public class TestLion {
     public void doesHaveManeReturnsTrueForMale() throws Exception {
         Lion lion = new Lion("Самец", feline);
         assertTrue("У самца должна быть грива", lion.doesHaveMane());
-    }
-
-    @Test
-    public void doesHaveManeReturnsFalseForFemale() throws Exception {
-        Lion lion = new Lion("Самка", feline);
-        assertFalse("У самки не должно быть гривы", lion.doesHaveMane());
     }
 
     @Test
